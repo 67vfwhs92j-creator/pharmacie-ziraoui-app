@@ -1,0 +1,8 @@
+import { Image, Pressable, Text, View } from 'react-native';
+import { router } from 'expo-router';
+import { Button, Card } from '@/components/ui';
+import { colors } from '@/constants/theme';
+import { useCart } from '@/hooks/useCart';
+import { formatMAD } from '@/utils/format';
+import { Screen } from './Common';
+export default function CartScreen(){const{items,updateQuantity,removeItem,subtotal,discount}=useCart();return <Screen title="Panier">{items.length===0?<Card><Text>Votre panier est vide. Ajoutez des produits depuis le catalogue.</Text></Card>:items.map(i=><Card key={i.product.id} style={{marginBottom:12}}><View style={{flexDirection:'row',gap:12}}><Image source={{uri:i.product.image}} style={{width:76,height:76,borderRadius:16}}/><View style={{flex:1}}><Text style={{fontWeight:'900'}}>{i.product.name}</Text><Text>{formatMAD(i.product.price)}</Text><View style={{flexDirection:'row',gap:12,alignItems:'center',marginTop:8}}><Pressable onPress={()=>updateQuantity(i.product.id,i.quantity-1)}><Text style={{fontSize:24}}>-</Text></Pressable><Text>{i.quantity}</Text><Pressable onPress={()=>updateQuantity(i.product.id,i.quantity+1)}><Text style={{fontSize:24}}>+</Text></Pressable><Pressable onPress={()=>removeItem(i.product.id)}><Text style={{color:colors.danger}}>Supprimer</Text></Pressable></View></View></View></Card>)}<Card><Text>Sous-total : {formatMAD(subtotal)}</Text><Text>Réduction éventuelle : {formatMAD(discount)}</Text><Text style={{fontWeight:'900',fontSize:20}}>Total hors livraison : {formatMAD(subtotal)}</Text><Button title="Passer à la validation" onPress={()=>router.push('/checkout')} /></Card></Screen>}
