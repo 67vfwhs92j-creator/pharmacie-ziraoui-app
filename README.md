@@ -65,3 +65,43 @@ Les informations modifiables sont dans `constants/config.ts` : nom, téléphone,
 ## Sécurité produit
 
 L'application est centrée sur la parapharmacie. Elle ne propose aucun diagnostic médical. Les produits disposent d'un champ `deliveryEligible` et les articles nécessitant un contrôle peuvent utiliser `requiresPharmacyValidation`.
+
+## Accès web public avec GitHub Pages
+
+Après fusion de la pull request dans `main` et activation de GitHub Pages avec la source **GitHub Actions**, l'application web statique sera publiée automatiquement à l'adresse attendue :
+
+```text
+https://pharmacie-ziraoui.github.io/pharmacie-ziraoui-app/
+```
+
+Cette URL est configurée pour fonctionner sous le sous-chemin GitHub Pages `/pharmacie-ziraoui-app` grâce au `baseUrl` Expo Router défini dans `app.json`. Les routes Expo Router, les images et les fichiers générés par `npx expo export --platform web` doivent donc être résolus depuis ce chemin public.
+
+### Déploiement automatique
+
+Le workflow GitHub Actions **Deploy Expo Web to GitHub Pages** (`.github/workflows/deploy-web.yml`) s'exécute à chaque push sur `main`. Il :
+
+1. installe les dépendances avec `npm install` ;
+2. lance `npm run typecheck` ;
+3. lance `npm run lint` ;
+4. génère l'export web avec `npx expo export --platform web` ;
+5. vérifie que `dist/index.html` existe ;
+6. publie le dossier `dist` sur GitHub Pages sans secret supplémentaire.
+
+### Relancer le déploiement
+
+Pour relancer le déploiement sans modifier le code :
+
+1. ouvrez l'onglet **Actions** du dépôt GitHub ;
+2. sélectionnez le workflow **Deploy Expo Web to GitHub Pages** ;
+3. cliquez sur **Run workflow** sur la branche `main`.
+
+Si GitHub Pages n'a jamais été configuré pour le dépôt, une étape manuelle peut être nécessaire dans **Settings → Pages** : choisir **GitHub Actions** comme source de publication.
+
+### Tester l'export web localement
+
+```bash
+npm run export:web
+npx expo serve --platform web
+```
+
+Le dossier généré localement est `dist`.
