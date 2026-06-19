@@ -1,0 +1,9 @@
+export type Language = 'fr' | 'ar' | 'en';
+export type Category = 'Visage' | 'Corps' | 'Cheveux' | 'Hygiène' | 'Bébé et maman' | 'Solaire' | 'Bien-être' | 'Matériel médical';
+export type Availability = 'Disponible' | 'Stock limité' | 'Sur commande' | 'Indisponible';
+export type Product = { id:string; name:string; brand:string; image:string; category:Category; price:number; oldPrice?:number; description:string; usageTips:string; availability:Availability; stock:number; isPromo:boolean; isFavorite:boolean; deliveryEligible:boolean; requiresPharmacyValidation?:boolean; isNew?:boolean };
+export type CartItem = { product: Product; quantity: number };
+export type ReceptionMode = 'pickup' | 'delivery';
+export type OrderStatus = 'Commande reçue'|'En attente de confirmation'|'Confirmée'|'En préparation'|'Prête'|'En cours de livraison'|'Livrée'|'Annulée';
+export type CustomerInfo = { name:string; phone:string; pickupTime?:string; city?:string; district?:string; address?:string; residence?:string; floor?:string; apartment?:string; landmark?:string; deliverySlot?:string; notes?:string };
+export type Order = { id:string; items:CartItem[]; customer:CustomerInfo; receptionMode:ReceptionMode; paymentMode:string; subtotal:number; discount:number; deliveryFee:number; total:number; status:OrderStatus; createdAt:string };

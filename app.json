@@ -1,0 +1,1 @@
+{"expo":{"name":"Pharmacie Ziraoui","slug":"pharmacie-ziraoui","version":"1.0.0","orientation":"portrait","scheme":"pharmacieziraoui","userInterfaceStyle":"light","newArchEnabled":true,"ios":{"supportsTablet":true},"android":{"adaptiveIcon":{"backgroundColor":"#ffffff"}},"web":{"bundler":"metro","output":"single"},"plugins":["expo-router"]}}
