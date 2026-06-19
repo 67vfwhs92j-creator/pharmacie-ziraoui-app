@@ -71,7 +71,7 @@ L'application est centrée sur la parapharmacie. Elle ne propose aucun diagnosti
 Après fusion de la pull request dans `main` et activation de GitHub Pages avec la source **GitHub Actions**, l'application web statique sera publiée automatiquement à l'adresse attendue :
 
 ```text
-https://pharmacie-ziraoui.github.io/pharmacie-ziraoui-app/
+https://67vfwhs92j-creator.github.io/pharmacie-ziraoui-app/
 ```
 
 Cette URL est configurée pour fonctionner sous le sous-chemin GitHub Pages `/pharmacie-ziraoui-app` grâce au `baseUrl` Expo Router défini dans `app.json`. Les routes Expo Router, les images et les fichiers générés par `npx expo export --platform web` doivent donc être résolus depuis ce chemin public.
