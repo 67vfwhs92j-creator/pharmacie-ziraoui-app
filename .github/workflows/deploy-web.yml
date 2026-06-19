@@ -28,9 +28,10 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Check TypeScript
         run: npm run typecheck
@@ -39,7 +40,7 @@ jobs:
         run: npm run lint
 
       - name: Export Expo web
-        run: npx expo export --platform web
+        run: npm run export:web
 
       - name: Verify dist output
         run: test -d dist && test -f dist/index.html
